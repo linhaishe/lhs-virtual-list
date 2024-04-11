@@ -7,6 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/typescript',
     'plugin:markdown/recommended',
+    'plugin:storybook/recommended',
   ],
   env: {
     browser: true,
