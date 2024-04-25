@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import type { ListsProps } from './types';
 
-const FixedSizeList = (props: any) => {
+const FixedSizeList = (props: ListsProps) => {
   const { height, width, itemSize, itemCount, children: Child } = props;
   // 记录滚动掉的高度
   const [scrollOffset, setScrollOffset] = useState(0);
