@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
-import type { ListsProps } from './types';
+import { ItemSizeTypeE, type ListsProps } from './types';
+import { getItemMetaData, getRangeToRender } from './utils';
 
-const FixedSizeList = (props: ListsProps) => {
-  const { height, width, itemSize, itemCount, children: Child } = props;
+const VirtualList = (props: ListsProps) => {
+  const {
+    height,
+    width,
+    itemSize = 0,
+    itemCount,
+    children: Child,
+    // getItemSize,
+    // itemEstimatedSize,
+    itemSizeType = ItemSizeTypeE.stableSize,
+  } = props;
   // 记录滚动掉的高度
   const [scrollOffset, setScrollOffset] = useState(0);
 
@@ -21,27 +31,46 @@ const FixedSizeList = (props: ListsProps) => {
   };
 
   const getCurrentChildren = () => {
-    // 可视区起始索引
-    const startIndex = Math.floor(scrollOffset / itemSize);
-    // 上缓冲区起始索引
-    const finialStartIndex = Math.max(0, startIndex - 2);
-    // 可视区能展示的元素的最大个数
-    const numVisible = Math.ceil(height / itemSize);
-    // 下缓冲区结束索引
-    const endIndex = Math.min(itemCount, startIndex + numVisible + 2);
-    const items = [];
-    // 根据上面计算的索引值，不断添加元素给container
-    for (let i = finialStartIndex; i < endIndex; i++) {
-      const itemStyle = {
-        position: 'absolute',
-        height: itemSize,
-        width: '100%',
-        // 计算每个元素在container中的top值
-        top: itemSize * i,
-      };
-      items.push(<Child key={i} index={i} style={itemStyle} />);
+    if (itemSizeType === ItemSizeTypeE.stableSize) {
+      // 可视区起始索引
+      const startIndex = Math.floor(scrollOffset / itemSize);
+      // 上缓冲区起始索引
+      const finialStartIndex = Math.max(0, startIndex - 2);
+      // 可视区能展示的元素的最大个数
+      const numVisible = Math.ceil(height / itemSize);
+      // 下缓冲区结束索引
+      const endIndex = Math.min(itemCount, startIndex + numVisible + 2);
+      const items = [];
+      // 根据上面计算的索引值，不断添加元素给container
+      for (let i = finialStartIndex; i < endIndex; i++) {
+        const itemStyle = {
+          position: 'absolute',
+          height: itemSize,
+          width: '100%',
+          // 计算每个元素在container中的top值
+          top: itemSize * i,
+        };
+        items.push(<Child key={i} index={i} style={itemStyle} />);
+      }
+      return items;
     }
-    return items;
+
+    if (itemSizeType === ItemSizeTypeE.variableSize) {
+      const [startIndex, endIndex] = getRangeToRender(props, scrollOffset);
+      const items = [];
+
+      for (let i = startIndex; i <= endIndex; i++) {
+        const item = getItemMetaData(props, i);
+        const itemStyle = {
+          position: 'absolute',
+          height: item.size,
+          width: '100%',
+          top: item.offset,
+        };
+        items.push(<Child key={i} index={i} style={itemStyle} />);
+      }
+      return items;
+    }
   };
 
   // 当触发滚动就重新计算
@@ -57,4 +86,4 @@ const FixedSizeList = (props: ListsProps) => {
   );
 };
 
-export default FixedSizeList;
+export default VirtualList;
