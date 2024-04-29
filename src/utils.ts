@@ -1,4 +1,4 @@
-import type { ListsProps } from './types';
+import type { VariableSizeListProps } from './types';
 
 interface MeasuredDataItem {
   offset: number;
@@ -48,7 +48,7 @@ const estimatedHeight = (itemCount: number, defaultEstimatedItemSize = 5) => {
   return totalEstimatedHeight;
 };
 
-const getItemMetaData = (props: ListsProps, index: number) => {
+const getItemMetaData = (props: VariableSizeListProps, index: number) => {
   // console.log('index', index);
   // 这里打印会无限循环，为什么？好像不是循环，是昂贵计算
   const { getItemSize } = props;
@@ -73,7 +73,7 @@ const getItemMetaData = (props: ListsProps, index: number) => {
   return measuredDataMap[index];
 };
 
-const getStartIndex = (props: ListsProps, scrollOffset: number) => {
+const getStartIndex = (props: VariableSizeListProps, scrollOffset: number) => {
   const { itemCount } = props;
   let index = 0;
   while (true) {
@@ -87,7 +87,7 @@ const getStartIndex = (props: ListsProps, scrollOffset: number) => {
   }
 };
 
-const getEndIndex = (props: ListsProps, startIndex: number) => {
+const getEndIndex = (props: VariableSizeListProps, startIndex: number) => {
   const { height, itemCount } = props;
   // 获取可视区内开始的项
   const startItem = getItemMetaData(props, startIndex);
@@ -110,7 +110,7 @@ const getEndIndex = (props: ListsProps, startIndex: number) => {
 /**
  * 获取起始索引和结束索引
  */
-const getRangeToRender = (props: ListsProps, scrollOffset: number) => {
+const getRangeToRender = (props: VariableSizeListProps, scrollOffset: number) => {
   const { itemCount } = props;
   const startIndex = getStartIndex(props, scrollOffset);
   console.log('startIndex', startIndex);
