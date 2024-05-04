@@ -3,7 +3,7 @@ import { getItemMetaData, getRangeToRender } from './utils';
 import type { VariableSizeListProps } from './types';
 
 const VirtualList = (props: VariableSizeListProps) => {
-  const { height, width, itemSize = 0, itemCount, children: Child } = props;
+  const { height, width, itemEstimatedSize = 50, itemCount, children: Child } = props;
   // 记录滚动掉的高度
   const [scrollOffset, setScrollOffset] = useState(0);
 
@@ -17,7 +17,7 @@ const VirtualList = (props: VariableSizeListProps) => {
 
   // 1000个元素撑起盒子的实际高度
   const contentStyle = {
-    height: itemSize * itemCount,
+    height: itemEstimatedSize * itemCount,
     width: '100%',
   };
 
@@ -29,11 +29,14 @@ const VirtualList = (props: VariableSizeListProps) => {
       const item = getItemMetaData(props, i);
       const itemStyle = {
         position: 'absolute',
-        height: item.size,
+        height: item?.size,
         width: '100%',
-        top: item.offset,
+        top: item?.offset,
       };
-      items.push(<Child key={i} index={i} style={itemStyle} />);
+
+      if (Child) {
+        items.push(<Child key={i} index={i} style={itemStyle} />);
+      }
     }
     return items;
   };

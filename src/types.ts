@@ -1,12 +1,11 @@
-// import type { ReactNode } from 'react';
+import type { ComponentType } from 'react';
 
 /**
  * @api
  */
 
 export interface FixedSizeListProps {
-  // children?: ReactNode;
-  children?: any;
+  children?: ComponentType<any>;
   /**
    * 列表高度
    */
@@ -26,8 +25,7 @@ export interface FixedSizeListProps {
 }
 
 export interface VariableSizeListProps {
-  // children?: ReactNode;
-  children?: any;
+  children?: ComponentType<any>;
   /**
    * 列表高度
    */
@@ -44,6 +42,26 @@ export interface VariableSizeListProps {
    * 获取元素高度，'variableSize'时使用
    */
   getItemSize: Function;
+  /**
+   * 元素预计高度，不定高度的虚拟列表计算所需值，默认50
+   */
+  itemEstimatedSize?: number;
+}
+
+export interface DynamicSizeListProps {
+  children?: ComponentType<any>;
+  /**
+   * 列表高度
+   */
+  height: number;
+  /**
+   * 列表宽度
+   */
+  width: number;
+  /**
+   * 元素总数
+   */
+  itemCount: number;
   /**
    * 元素预计高度，不定高度的虚拟列表计算所需值，默认50
    */

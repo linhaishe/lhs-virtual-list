@@ -39,7 +39,10 @@ const FixedSizeList = (props: FixedSizeListProps) => {
         // 计算每个元素在container中的top值
         top: itemSize * i,
       };
-      items.push(<Child key={i} index={i} style={itemStyle} />);
+
+      if (Child) {
+        items.push(<Child key={i} index={i} style={itemStyle} />);
+      }
     }
     return items;
   };
