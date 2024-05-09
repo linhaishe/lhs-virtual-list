@@ -66,6 +66,19 @@ const getCurrentChildren = () => {
 };
 ```
 
+```
+const shouldRecalculate = recalculate ?? false; // 默认值移到函数内部
+
+这行代码使用了 TypeScript 中的空值合并操作符 (??)。空值合并操作符用于判断其左侧的值是否为 null 或 undefined，如果是，则返回右侧的值，否则返回左侧的值。在这里，它的作用是判断 recalculate 是否为 null 或 undefined，如果是，则将 shouldRecalculate 设置为 false，否则将 shouldRecalculate 设置为 recalculate 的值。
+
+这行代码的含义可以理解为：
+
+如果 recalculate 不是 null 或 undefined，则将 shouldRecalculate 设置为 recalculate 的值。
+如果 recalculate 是 null 或 undefined，则将 shouldRecalculate 设置为 false。
+这样就可以确保即使调用函数时未提供 recalculate 参数，也能在函数内部得到一个默认值 false，从而避免了 TypeScript 中参数不能同时有默认值和可选标记的问题。
+
+```
+
 ## wait to fix:
 
 1. 动态高度虚拟列表中，光标和滚动条在动态高度的时候，是脱轨的。
