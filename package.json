@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +27,7 @@
     "@storybook/blocks": "^8.0.6",
     "@storybook/react": "^8.0.6",
     "@storybook/react-webpack5": "^8.0.6",
+    "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.54.0",
@@ -36,7 +37,7 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-compat": "^4.2.0",
     "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jest": "^27.6.0",
+    "eslint-plugin-jest": "^27.9.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-markdown": "^3.0.1",
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
@@ -55,6 +56,12 @@
     "storybook": "^8.0.6",
     "typescript": "^5.3.2"
   },
+  "dependencies": {
+    "@storybook/test": "^8.0.6",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18"
+  },
   "lint-staged": {
     "*.scss": [
       "prettier --write ./src",
@@ -66,12 +73,11 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "@types/jest": "^29.5.11",
-    "@types/node": "^20.11.5",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "@storybook/test": "^8.0.6"
-    
+  "jest": {
+    "roots": [
+      "./tests"
+    ],
+    "verbose": true,
+    "testRegex": ".test.js$"
   }
 }

@@ -20,7 +20,7 @@ const measuredData: MeasuredData = {
 };
 
 使用的时候会有如下报错：
-const lastMeasuredItem = measuredDataMap[LastMeasuredItemIndex] 
+const lastMeasuredItem = measuredDataMap[LastMeasuredItemIndex]
 // 元素隐式具有 "any" 类型，因为类型为 "number" 的表达式不能用于索引类型 "{ LastMeasuredItemIndex: string; }"。在类型 "{ LastMeasuredItemIndex: string; }" 上找不到具有类型为 "number" 的参数的索引签名。
 
 // 这个错误是因为你正在尝试使用一个类型为number的表达式来索引一个类型为{ LastMeasuredItemIndex: string; }的对象。在 TypeScript 中，当你使用一个不是字符串的值作为对象的索引时，TypeScript 会给出这个错误。
@@ -97,3 +97,9 @@ const getCurrentChildren = () => {
 3. https://github.com/bvaughn/react-window/tree/master
 4. https://github.com/ant-design/ant-design/blob/master/components/table/InternalTable.tsx
 5. https://www.npmjs.com/package/ant-virtual-table?activeTab=readme
+
+## FOR TEST
+
+1. https://github.com/dwqs/react-virtual-list/blob/develop/tests/index.test.js
+2. https://github.com/bvaughn/react-window/blob/master/src/__tests__/FixedSizeList.js
+3. https://github.com/ant-design/ant-design/blob/master/components/table/__tests__/Table.virtual.test.tsx
