@@ -1,10 +1,9 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { PureComponent } from 'react';
-import ReactTestRenderer from 'react-test-renderer';
+import React, { PureComponent, useState } from 'react';
 import * as domHelpers from './utils/domHelpers';
 import { FixedSizeList } from '../src';
 import { JSDOM } from 'jsdom';
+import renderer from 'react-test-renderer';
+
 // 创建一个虚拟的 DOM 环境
 const dom = new JSDOM('<!doctype html><html><body></body></html>');
 
@@ -21,16 +20,12 @@ test('adds 1 + 2 to equal 3', () => {
 });
 
 describe('FixedSizeList', () => {
-  // eslint-disable-next-line no-unused-vars
   let HTMLElement: any;
   let itemRenderer: any;
   let defaultProps: any;
-  // eslint-disable-next-line no-unused-vars
   let getScrollbarSize;
   let onItemsRendered: any;
-  // eslint-disable-next-line no-unused-vars
   let mockedScrollHeight = Number.MAX_SAFE_INTEGER;
-  // eslint-disable-next-line no-unused-vars
   let mockedScrollWidth = Number.MAX_SAFE_INTEGER;
 
   // Use PureComponent to test memoization.
@@ -90,8 +85,55 @@ describe('FixedSizeList', () => {
   });
 
   it('should render an empty list', () => {
-    ReactTestRenderer.create(<FixedSizeList {...defaultProps} itemCount={0} />);
+    renderer.create(<FixedSizeList {...defaultProps} itemCount={0} />);
     expect(itemRenderer).not.toHaveBeenCalled();
     expect(onItemsRendered).not.toHaveBeenCalled();
   });
+});
+
+// test passes
+
+const STATUS = {
+  HOVERED: 'hovered',
+  NORMAL: 'normal',
+};
+
+function Link({ page, children }: any) {
+  const [status, setStatus] = useState(STATUS.NORMAL);
+
+  const onMouseEnter = () => {
+    setStatus(STATUS.HOVERED);
+  };
+
+  const onMouseLeave = () => {
+    setStatus(STATUS.NORMAL);
+  };
+
+  return (
+    <a className={status} href="#" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {children}
+    </a>
+  );
+}
+
+it('changes the class when hovered', () => {
+  const component = renderer.create(<Link page="http://www.facebook.com">Facebook</Link>);
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+
+  // manually trigger the callback
+  renderer.act(() => {
+    tree!.props.onMouseEnter();
+  });
+  // re-rendering
+  tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+
+  // manually trigger the callback
+  renderer.act(() => {
+    tree!.props.onMouseLeave();
+  });
+  // re-rendering
+  tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
 });

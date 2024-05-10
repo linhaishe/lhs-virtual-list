@@ -6,7 +6,7 @@ let size: number = -1;
 export function getScrollbarSize(recalculate: boolean = false): number {
   if (size === -1 || recalculate) {
     const div = document.createElement('div');
-    const style = div.style;
+    const { style } = div;
     style.width = '50px';
     style.height = '50px';
     style.overflow = 'scroll';
