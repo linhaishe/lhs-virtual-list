@@ -116,3 +116,11 @@ const shouldRecalculate = recalculate ?? false; // 默认值移到函数内部
 1. https://github.com/dwqs/react-virtual-list/blob/develop/tests/index.test.js
 2. https://github.com/bvaughn/react-window/blob/master/src/__tests__/FixedSizeList.js
 3. https://github.com/ant-design/ant-design/blob/master/components/table/__tests__/Table.virtual.test.tsx
+
+## for build and publish
+
+1. https://hackernoon.com/how-to-publish-a-react-component-as-a-package-to-npm
+2. https://levelup.gitconnected.com/publish-react-components-as-an-npm-package-7a671a2fb7f
+3. https://betterprogramming.pub/how-to-publish-a-react-component-library-c89a07566770
+4. https://docs.npmjs.com/cli/v10/configuring-npm/package-json/
+5. https://webpack.js.org/guides/getting-started/
