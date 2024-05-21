@@ -119,8 +119,56 @@ const shouldRecalculate = recalculate ?? false; // 默认值移到函数内部
 
 ## for build and publish
 
-1. https://hackernoon.com/how-to-publish-a-react-component-as-a-package-to-npm
-2. https://levelup.gitconnected.com/publish-react-components-as-an-npm-package-7a671a2fb7f
-3. https://betterprogramming.pub/how-to-publish-a-react-component-library-c89a07566770
-4. https://docs.npmjs.com/cli/v10/configuring-npm/package-json/
-5. https://webpack.js.org/guides/getting-started/
+1. https://betterprogramming.pub/how-to-publish-a-react-component-library-c89a07566770
+2. https://hackernoon.com/how-to-publish-a-react-component-as-a-package-to-npm
+3. https://levelup.gitconnected.com/publish-react-components-as-an-npm-package-7a671a2fb7f
+4. [package json config docs](https://docs.npmjs.com/cli/v10/configuring-npm/package-json/)
+5. [webpack official docs](https://webpack.js.org/guides/getting-started/)
+6. [webpack crash course](https://www.youtube.com/watch?v=IZGNcSuwBZs)
+7. [webpack-starter](https://github.com/bradtraversy/webpack-starter/blob/main/webpack.config.js)
+8. [Webpack组件库打包超详细指南](https://juejin.cn/post/7082738107237433375)
+9. https://github.com/dwqs/react-virtual-list/blob/develop/webpack.build.config.js
+
+```
+const path = require('path')
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    index: path.resolve(__dirname, './src/index')
+  },
+
+  output: {
+    path: path.join(__dirname, './dist'),
+    filename: '[name].js',
+    library: 'ReactVirtualList',
+    libraryTarget: 'commonjs2'
+  },
+
+  module: {
+    rules: [{
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader'
+    }]
+  },
+
+  resolve: {
+    extensions: ['.jsx', '.ts', '.js'],
+    modules: [path.join(__dirname, './node_modules')]
+  },
+
+  optimization: {
+    minimize: false
+  },
+
+  externals: [{
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
+  }]
+}
+```

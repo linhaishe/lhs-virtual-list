@@ -30,10 +30,11 @@ module.exports = {
   // https://github.com/typescript-eslint/typescript-eslint/issues/46#issuecomment-470486034
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['*.js', '*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/no-unused-vars': [1, { args: 'none' }],
+        '@typescript-eslint/no-unused-vars': [0, { args: 'none' }],
         'no-unused-expressions': 'off',
+        'no-unused-vars': 1,
         '@typescript-eslint/no-unused-expressions': 2,
         '@typescript-eslint/consistent-type-imports': [2, { disallowTypeAnnotations: false }],
       },
@@ -199,6 +200,7 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
     'no-undef': 0,
     'import/order': 0,
+    'no-unused-vars': 1,
   },
   globals: {
     gtag: true,
