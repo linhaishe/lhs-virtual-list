@@ -2,10 +2,26 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "target": "es2015",
-    "module": "es2015",
+    "module": "es6",
     "outDir": "./es",
     "moduleResolution": "node",
     "noUnusedParameters": false,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "declaration": true,
+    "baseUrl": "./",
+    "sourceMap": true,
+    "allowJs": true,
+    "lib": ["es7", "dom"],
+    "noImplicitAny": false,
+    "jsx": "react",
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "strict": true
   }
 }

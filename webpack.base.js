@@ -12,12 +12,40 @@ module.exports = {
       {
         test: /\.(tsx|ts|js|)$/i,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
+        // use: {
+        //   loader: 'babel-loader',
+        //   options: {
+        //     presets: ['@babel/preset-env'],
+        //   },
+        // },
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                '@babel/preset-react',
+                [
+                  '@babel/preset-env',
+                  {
+                    modules: false,
+                    targets: {
+                      browsers: ['> 0.5%', 'last 2 versions', 'Firefox ESR', 'not dead', 'not IE 11'],
+                    },
+                  },
+                ],
+              ],
+              plugins: ['lodash'],
+            },
           },
-        },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              happyPackMode: false,
+              appendTsSuffixTo: [],
+            },
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -27,7 +55,7 @@ module.exports = {
   },
   // add ts and tsx suffix to resolve entry，使编译能自动匹配后缀
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
 };
 

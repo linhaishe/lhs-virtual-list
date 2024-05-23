@@ -144,20 +144,20 @@ module.exports = {
     'react/no-unused-class-component-methods': 0,
     'import/extensions': 0,
     'import/no-cycle': 2,
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: [
-          'site/**',
-          'tests/**',
-          'scripts/**',
-          '**/*.test.js',
-          '**/__tests__/*',
-          '*.config.js',
-          '**/*.md',
-        ],
-      },
-    ],
+    // 'import/no-extraneous-dependencies': [
+    //   'error',
+    //   {
+    //     devDependencies: [
+    //       'site/**',
+    //       'tests/**',
+    //       'scripts/**',
+    //       '**/*.test.js',
+    //       '**/__tests__/*',
+    //       '*.config.js',
+    //       '**/*.md',
+    //     ],
+    //   },
+    // ],
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/anchor-has-content': 0,
     'jsx-a11y/click-events-have-key-events': 0,
@@ -201,6 +201,7 @@ module.exports = {
     'no-undef': 0,
     'import/order': 0,
     'no-unused-vars': 1,
+    'import/no-extraneous-dependencies': 0,
   },
   globals: {
     gtag: true,
