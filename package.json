@@ -14,8 +14,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest",
-    "build": "webpack --config webpack.prod.js --progress",
-    "build2": "rm -rf dist && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
+    "build": "webpack --config webpack.prod.js --progress & rm -rf dist && tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
     "dev": "webpack serve"
   },
   "keywords": [],
